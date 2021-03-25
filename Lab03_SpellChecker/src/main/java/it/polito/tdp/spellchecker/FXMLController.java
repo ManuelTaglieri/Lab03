@@ -1,7 +1,13 @@
 package it.polito.tdp.spellchecker;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.spellchecker.model.Dictionary;
+import it.polito.tdp.spellchecker.model.RichWord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 public class FXMLController {
+	
+	private Dictionary dictionary;
 
     @FXML
     private ResourceBundle resources;
@@ -40,12 +48,49 @@ public class FXMLController {
 
     @FXML
     void doClearText(ActionEvent event) {
+    	
+    	txtResult.clear();
+    	txtFrase.clear();
+    	txtErrori.setText("");
+    	txtTempo.setText("");
 
     }
 
     @FXML
     void doSpellCheck(ActionEvent event) {
-
+    	
+    	int errori=0;
+    	
+    	if (boxLingue.getValue()==null) {
+    		txtResult.setText("Inserire la lingua.\n");
+    		return;
+    	}
+    	
+    	txtResult.clear();
+    	dictionary.loadDictionary(boxLingue.getValue());
+    	
+    	String testo = txtFrase.getText();
+    	testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"]","");
+    	testo = testo.toLowerCase();
+    	String[] analisi = testo.split(" ");
+    	
+    	ArrayList<String> listaAnalisi = new ArrayList<String>();
+    	
+    	for (String s : analisi) {
+    		listaAnalisi.add(s);
+    	}
+    	
+    	List<RichWord> risultato = dictionary.spellCheckTest(listaAnalisi);
+    	
+    	for (RichWord r : risultato) {
+    		if (!r.isCorretta()) {
+    			txtResult.appendText(r.getParola() + "\n");
+    			errori++;
+    		}
+    	}
+    	
+    	txtErrori.setText("Il testo contiene " + errori + " errori");
+    	
     }
 
     @FXML
@@ -61,5 +106,9 @@ public class FXMLController {
         this.boxLingue.getItems().add("Italian");
         this.boxLingue.getItems().add("English");
 
+    }
+    
+    public void setModel(Dictionary model) {
+    	this.dictionary = model;
     }
 }
