@@ -81,7 +81,7 @@ public class FXMLController {
     	}
     	
     	long startTime = System.nanoTime();
-    	List<RichWord> risultato = dictionary.spellCheckTest(listaAnalisi);
+    	List<RichWord> risultato = dictionary.spellCheckTestLinear(listaAnalisi);
     	long endTime = System.nanoTime();
     	
     	txtTempo.setText("Spell check completato in " + (endTime - startTime) + " nanosecondi");
