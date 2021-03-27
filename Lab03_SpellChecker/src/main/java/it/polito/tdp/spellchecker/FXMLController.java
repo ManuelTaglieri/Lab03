@@ -70,7 +70,7 @@ public class FXMLController {
     	dictionary.loadDictionary(boxLingue.getValue());
     	
     	String testo = txtFrase.getText();
-    	testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"]","");
+    	testo = testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"\\?]","");
     	testo = testo.toLowerCase();
     	String[] analisi = testo.split(" ");
     	
@@ -80,7 +80,11 @@ public class FXMLController {
     		listaAnalisi.add(s);
     	}
     	
+    	long startTime = System.nanoTime();
     	List<RichWord> risultato = dictionary.spellCheckTest(listaAnalisi);
+    	long endTime = System.nanoTime();
+    	
+    	txtTempo.setText("Spell check completato in " + (endTime - startTime) + " nanosecondi");
     	
     	for (RichWord r : risultato) {
     		if (!r.isCorretta()) {
