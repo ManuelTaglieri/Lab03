@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Dictionary {
 	
-	HashSet<String> dizionario;
+	LinkedList<String> dizionario;
 	
 	public Dictionary() {
-		this.dizionario = new HashSet<String>();
+		this.dizionario = new LinkedList<String>();
 	}
 
 	public void loadDictionary(String language) {
@@ -60,7 +60,7 @@ public class Dictionary {
 		return risultato;
 	}
 	
-	/*public List<RichWord> spellCheckTestDichotomic(List<String> inputTextList) {
+	public List<RichWord> spellCheckTestDichotomic(List<String> inputTextList) {
 		LinkedList<RichWord> risultato = new LinkedList<RichWord>();
 		for (String s : inputTextList) {
 			boolean controllo = false;
@@ -90,6 +90,6 @@ public class Dictionary {
 			risultato.add(new RichWord(s, controllo));
 		}
 		return risultato;
-	}*/
+	}
 
 }
