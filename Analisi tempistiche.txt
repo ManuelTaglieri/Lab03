@@ -1,0 +1,9 @@
+150000 Array
+300000 Linked
+Linear
+
+Dichotomic
+Linked >>>> Array
+
+Set
+8000 nanosecondi

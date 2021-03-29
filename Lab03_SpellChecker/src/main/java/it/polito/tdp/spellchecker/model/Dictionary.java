@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Dictionary {
 	
-	LinkedList<String> dizionario;
+	List<String> dizionario;
 	
 	public Dictionary() {
-		this.dizionario = new LinkedList<String>();
+		this.dizionario = new ArrayList<String>();
 	}
 
 	public void loadDictionary(String language) {
@@ -64,28 +64,19 @@ public class Dictionary {
 		LinkedList<RichWord> risultato = new LinkedList<RichWord>();
 		for (String s : inputTextList) {
 			boolean controllo = false;
-			if (s.compareTo(dizionario.get((int) dizionario.size()/2))==0) {
+			List<String> dizionario = this.dizionario;
+			while (dizionario.size()>1) {
+				int meta = (int) dizionario.size()/2;
+			if (s.compareTo(dizionario.get(meta))==0) {
 				controllo = true;
+				break;
 			}
-			else if (s.compareTo(dizionario.get(dizionario.size()/2))>0) {
-				int i = (int) dizionario.size()/2;
-				while(i<dizionario.size()) {
-					if (s.equals(dizionario.get(i))) {
-						controllo = true;
-						break;
-					}
-					i++;
-				}
+			else if (s.compareTo(dizionario.get(meta))>0) {
+				dizionario =  dizionario.subList(meta, dizionario.size());
 			}
-			else if (s.compareTo(dizionario.get(dizionario.size()/2))<0) {
-				int i = (int) dizionario.size()/2;
-				while(i>-1) {
-					if (s.equals(dizionario.get(i))) {
-						controllo = true;
-						break;
-					}
-					i--;
-				}
+			else if (s.compareTo(dizionario.get(meta))<0) {
+				dizionario =  dizionario.subList(0, meta);
+			}
 			}
 			risultato.add(new RichWord(s, controllo));
 		}
