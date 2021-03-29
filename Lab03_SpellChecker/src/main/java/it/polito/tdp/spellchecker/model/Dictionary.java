@@ -59,37 +59,5 @@ public class Dictionary {
 		}
 		return risultato;
 	}
-	
-	/*public List<RichWord> spellCheckTestDichotomic(List<String> inputTextList) {
-		LinkedList<RichWord> risultato = new LinkedList<RichWord>();
-		for (String s : inputTextList) {
-			boolean controllo = false;
-			if (s.compareTo(dizionario.get((int) dizionario.size()/2))==0) {
-				controllo = true;
-			}
-			else if (s.compareTo(dizionario.get(dizionario.size()/2))>0) {
-				int i = (int) dizionario.size()/2;
-				while(i<dizionario.size()) {
-					if (s.equals(dizionario.get(i))) {
-						controllo = true;
-						break;
-					}
-					i++;
-				}
-			}
-			else if (s.compareTo(dizionario.get(dizionario.size()/2))<0) {
-				int i = (int) dizionario.size()/2;
-				while(i>-1) {
-					if (s.equals(dizionario.get(i))) {
-						controllo = true;
-						break;
-					}
-					i--;
-				}
-			}
-			risultato.add(new RichWord(s, controllo));
-		}
-		return risultato;
-	}*/
 
 }

@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.MouseEvent;
 
 public class FXMLController {
 	
@@ -45,7 +47,10 @@ public class FXMLController {
 
     @FXML
     private Label txtTempo;
-
+    
+    private boolean inglese;
+    private boolean italiano;
+    
     @FXML
     void doClearText(ActionEvent event) {
     	
@@ -67,7 +72,15 @@ public class FXMLController {
     	}
     	
     	txtResult.clear();
-    	dictionary.loadDictionary(boxLingue.getValue());
+    	
+    	if (!italiano && boxLingue.getValue().equals("Italian")) {
+    		dictionary.loadDictionary(boxLingue.getValue());
+    		italiano = true;
+    	}
+    	else if (!inglese && boxLingue.getValue().equals("English")) {
+    		dictionary.loadDictionary(boxLingue.getValue());
+    		inglese = true;
+    	}
     	
     	String testo = txtFrase.getText();
     	testo = testo.replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]\"\\?]","");
@@ -110,6 +123,8 @@ public class FXMLController {
         this.boxLingue.getItems().add("Italian");
         this.boxLingue.getItems().add("English");
 
+        this.inglese = false;
+        this.italiano = false;
     }
     
     public void setModel(Dictionary model) {
